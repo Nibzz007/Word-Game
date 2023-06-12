@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:mobigic_test/core/colors/color.dart';
 
+// AppBar Style
 TextStyle appBarTextStyle = const TextStyle(
   fontSize: 25,
   color: kWhite,
   fontWeight: FontWeight.w600,
+);
+
+// GridDisplayScreen
+TextStyle gridDisplayLabelTextStyle = const TextStyle(
+  fontSize: 16,
+  color: kBlack,
+  fontWeight: FontWeight.w600,
+);
+
+// TextFormField
+TextStyle textFieldStyle = const TextStyle(
+  color: kWhite,
 );
 
 TextStyle labelTextStyle = const TextStyle(
@@ -13,23 +26,14 @@ TextStyle labelTextStyle = const TextStyle(
   fontWeight: FontWeight.w600,
 );
 
-TextStyle gridDisplayLabelTextStyle = const TextStyle(
-  fontSize: 16,
-  color: kBlack,
-  fontWeight: FontWeight.w600,
-);
-
-
-TextStyle textFieldStyle = const TextStyle(
-  color: kWhite
-);
-
+//ElevatedButton
 TextStyle elevatedButtonStyle = const TextStyle(
   fontSize: 16,
   color: buttonTextColor,
   fontWeight: FontWeight.w600,
 );
 
+// AlertDialog
 TextStyle alertDialogTitleTextStyle = const TextStyle(
   fontSize: 20,
   color: kBlack,
