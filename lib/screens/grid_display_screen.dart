@@ -15,6 +15,7 @@ class GridDisplayScreen extends StatefulWidget {
 
 class _GridDisplayScreenState extends State<GridDisplayScreen> {
   TextEditingController searchController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<List<bool>> highlightGrid = [];
 
   @override
@@ -61,7 +62,7 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
       for (int i = 0; i < word.length; i++) {
         highlightGrid[row][col + i] = true;
       }
-    } 
+    }
     return wordFound;
   }
 
@@ -80,7 +81,7 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
       for (int i = 0; i < word.length; i++) {
         highlightGrid[row + i][col] = true;
       }
-    } 
+    }
     return wordFound;
   }
 
@@ -101,7 +102,7 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
       for (int i = 0; i < word.length; i++) {
         highlightGrid[row + i][col + i] = true;
       }
-    } 
+    }
     return wordFound;
   }
 
@@ -114,7 +115,6 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
           false,
         ),
       );
-      //searchController.clear();
     });
   }
 
@@ -137,21 +137,18 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              kHeight50,
+              kHeight100,
               GridView.builder(
                 shrinkWrap: true,
                 itemCount: widget.grid.length * widget.grid[0].length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: widget.grid[0].length,
-                  mainAxisSpacing: 0.8,
-                  crossAxisSpacing: 0.8,
-                  childAspectRatio: 1.4
-                ),
+                    crossAxisCount: widget.grid[0].length,
+                    mainAxisSpacing: 0.8,
+                    crossAxisSpacing: 0.8,
+                    childAspectRatio: 1.4),
                 itemBuilder: (context, index) {
                   int row = index ~/ widget.grid[0].length;
                   int col = index % widget.grid[0].length;
-                  // bool isHighlighted =
-                  //     searchText.contains(widget.grid[row][col]);
                   return Container(
                     decoration: BoxDecoration(
                       color: highlightGrid[row][col] ? kPurple : kWhite,
@@ -163,30 +160,101 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
                 },
               ),
               kHeight50,
-              TextFormWidget(
-                textEditingController: searchController,
-                labelText: 'Enter your word',
-                keyboardType: TextInputType.text,
-                labelStyle: labelTextStyle,
-                cursorColor: kWhite,
-                onChanged: (value) {
-                  reset();
-                  search(value);
-                },
+              Form(
+                key: formKey,
+                child: TextFormWidget(
+                  textEditingController: searchController,
+                  labelText: 'Search here.....',
+                  keyboardType: TextInputType.text,
+                  labelStyle: labelTextStyle,
+                  cursorColor: kWhite,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'The field cannot be empty';
+                    } else {
+                      return null;
+                    }
+                  },
+                  onChanged: (value) {
+                    reset();
+                    search(value);
+                  },
+                ),
               ),
-              kHeight10,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButtonWidget(
-                    onPressed: () {},
-                    text: 'Search',
-                  ),
-                  ElevatedButtonWidget(
-                    onPressed: () {},
-                    text: 'Reset',
-                  ),
-                ],
+              kHeight20,
+              ElevatedButtonWidget(
+                onPressed: () {
+                  if (!formKey.currentState!.validate()) {
+                    return;
+                  }
+                  if (search(searchController.text)) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(
+                            'Word found',
+                            style: alertDialogTitleTextStyle,
+                          ),
+                          content: Text(
+                            'The word is present in the Grid',
+                            style: alertDialogContentTextStyle,
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'Ok',
+                                style: alertDialogActionsTextStyle,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(
+                            'Word not found',
+                            style: alertDialogTitleTextStyle,
+                          ),
+                          content: Text(
+                            'The word is not present in the Grid',
+                            style: alertDialogContentTextStyle,
+                          ),
+                          actions: [
+                            Container(
+                              height: 50,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
+                                  width: 0.2,
+                                  color: kPurple,
+                                ),
+                              ),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  'Ok',
+                                  style: alertDialogActionsTextStyle,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                text: 'Search',
               ),
             ],
           ),

@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mobigic_test/core/colors/color.dart';
 import 'package:mobigic_test/core/fonts/font.dart';
 import 'package:mobigic_test/core/sizes/size.dart';
 import 'package:mobigic_test/screens/grid_display_screen.dart';
-
 import 'widgets/elevated_button_widget.dart';
 import 'widgets/textform_widget.dart';
 
@@ -43,7 +40,7 @@ class _GridCreationScreenState extends State<GridCreationScreen> {
             key: formKey,
             child: Column(
               children: [
-                kHeight100,
+                kHeight150,
                 TextFormWidget(
                   textEditingController: rowController,
                   labelText: 'Enter the number of rows',
@@ -81,11 +78,6 @@ class _GridCreationScreenState extends State<GridCreationScreen> {
                     }
                   },
                 ),
-                // kHeight10,
-                // ElevatedButtonWidget(
-                //   onPressed: () {},
-                //   text: 'Create Grid',
-                // ),
                 kHeight100,
                 TextFormWidget(
                   textEditingController: alphabetController,
@@ -101,15 +93,6 @@ class _GridCreationScreenState extends State<GridCreationScreen> {
                     }
                   },
                 ),
-                // kHeight10,
-                // ElevatedButtonWidget(
-                //   onPressed: () {
-                //     // if (!formKey.currentState!.validate()) {
-                //     //     return;
-                //     //   }
-                //   },
-                //   text: 'Fill the Grid',
-                // ),
                 kHeight20,
                 ElevatedButtonWidget(
                   onPressed: () {

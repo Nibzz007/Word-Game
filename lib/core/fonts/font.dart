@@ -29,3 +29,20 @@ TextStyle elevatedButtonStyle = const TextStyle(
   color: buttonTextColor,
   fontWeight: FontWeight.w600,
 );
+
+TextStyle alertDialogTitleTextStyle = const TextStyle(
+  fontSize: 20,
+  color: kBlack,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle alertDialogContentTextStyle = const TextStyle(
+  fontSize: 18,
+  color: kBlack,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle alertDialogActionsTextStyle = const TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w600,
+);
