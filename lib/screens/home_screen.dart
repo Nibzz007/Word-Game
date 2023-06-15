@@ -42,79 +42,77 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Form(
                   key: formKey,
-                  child: IntrinsicHeight(
-                    child: Column(
-                      children: [
-                        TextFormWidget(
-                          textEditingController: rowController,
-                          labelText: 'Enter the number of rows',
-                          keyboardType: TextInputType.number,
-                          labelStyle: labelTextStyle,
-                          cursorColor: kWhite,
-                          maxLength: 2,
-                          prefixIcon: const Icon(Icons.numbers),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Number of rows should not be empty';
-                            } else if (int.tryParse(value) == null) {
-                              return 'Invalid input. Please enter a valid number.';
-                            } else if (int.parse(value) <= 0 ||
-                                int.parse(value) > 7) {
-                              return 'Enter a value between 1 - 7';
-                            } else {
-                              return null;
-                            }
-                          },
-                          textAlign: TextAlign.left,
-                        ),
-                        kHeight20,
-                        TextFormWidget(
-                          textEditingController: columnController,
-                          labelText: 'Enter the number of columns',
-                          keyboardType: TextInputType.number,
-                          labelStyle: labelTextStyle,
-                          cursorColor: kWhite,
-                          maxLength: 2,
-                          prefixIcon: const Icon(Icons.numbers),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Number of columns should not be empty';
-                            } else if (int.tryParse(value) == null) {
-                              return 'Invalid input. Please enter a valid number.';
-                            } else if (int.parse(value) <= 0 ||
-                                int.parse(value) > 7) {
-                              return 'Enter a value between 1 - 7';
-                            } else {
-                              return null;
-                            }
-                          },
-                          textAlign: TextAlign.left,
-                        ),
-                        kHeight50,
-                        ElevatedButtonWidget(
-                          onPressed: () {
-                            if (!formKey.currentState!.validate()) {
-                              return;
-                            }
-                            setState(() {
-                              m = int.parse(rowController.text);
-                              n = int.parse(columnController.text);
-                              grid =
-                                  List.generate(m, (i) => List.filled(n, ''));
-                            });
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => GridCreationScreen(
-                                  rows: m,
-                                  columns: n,
-                                ),
+                  child: Column(
+                    children: [
+                      TextFormWidget(
+                        textEditingController: rowController,
+                        labelText: 'Enter the number of rows',
+                        keyboardType: TextInputType.number,
+                        labelStyle: labelTextStyle,
+                        cursorColor: kWhite,
+                        maxLength: 2,
+                        prefixIcon: const Icon(Icons.numbers),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Number of rows should not be empty';
+                          } else if (int.tryParse(value) == null) {
+                            return 'Invalid input. Please enter a valid number.';
+                          } else if (int.parse(value) <= 0 ||
+                              int.parse(value) > 7) {
+                            return 'Enter a value between 1 - 7';
+                          } else {
+                            return null;
+                          }
+                        },
+                        textAlign: TextAlign.left,
+                      ),
+                      kHeight20,
+                      TextFormWidget(
+                        textEditingController: columnController,
+                        labelText: 'Enter the number of columns',
+                        keyboardType: TextInputType.number,
+                        labelStyle: labelTextStyle,
+                        cursorColor: kWhite,
+                        maxLength: 2,
+                        prefixIcon: const Icon(Icons.numbers),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Number of columns should not be empty';
+                          } else if (int.tryParse(value) == null) {
+                            return 'Invalid input. Please enter a valid number.';
+                          } else if (int.parse(value) <= 0 ||
+                              int.parse(value) > 7) {
+                            return 'Enter a value between 1 - 7';
+                          } else {
+                            return null;
+                          }
+                        },
+                        textAlign: TextAlign.left,
+                      ),
+                      kHeight50,
+                      ElevatedButtonWidget(
+                        onPressed: () {
+                          if (!formKey.currentState!.validate()) {
+                            return;
+                          }
+                          setState(() {
+                            m = int.parse(rowController.text);
+                            n = int.parse(columnController.text);
+                            grid =
+                                List.generate(m, (i) => List.filled(n, ''));
+                          });
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => GridCreationScreen(
+                                rows: m,
+                                columns: n,
                               ),
-                            );
-                          },
-                          text: 'Create grid',
-                        ),
-                      ],
-                    ),
+                            ),
+                          );
+                        },
+                        text: 'Create grid',
+                      ),
+                    ],
                   ),
                 ),
               ),
