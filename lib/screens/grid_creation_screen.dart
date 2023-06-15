@@ -36,6 +36,7 @@ class _GridCreationScreenState extends State<GridCreationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: scaffoldBackgroundColor,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: kWhite),
@@ -85,7 +86,7 @@ class _GridCreationScreenState extends State<GridCreationScreen> {
                     );
                   },
                 ),
-                kHeight20,
+                kHeight50,
                 ElevatedButtonWidget(
                   onPressed: () {
                     if (!formKey.currentState!.validate()) {
