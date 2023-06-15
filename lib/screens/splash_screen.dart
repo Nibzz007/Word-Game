@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobigic_test/core/colors/color.dart';
 import 'package:mobigic_test/core/strings/strings.dart';
-import 'package:mobigic_test/screens/grid_creation_screen.dart';
+import 'package:mobigic_test/screens/home_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -25,7 +25,7 @@ class SplashScreen extends StatelessWidget {
       (value) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const GridCreationScreen(),
+            builder: (context) => const HomeScreen(),
           ),
         );
       },

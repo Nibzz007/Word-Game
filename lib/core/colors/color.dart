@@ -5,6 +5,5 @@ const Color kWhite = Colors.white;
 const Color kBlue = Colors.blue;
 const Color kPurple = Colors.deepPurple;
 const Color buttonTextColor = Colors.black54;
-const Color hintTextColor = Colors.white38;
 Color scaffoldBackgroundColor = const Color(0xFF343541);
 Color appBarColor = const Color(0xFF444654);

@@ -21,9 +21,9 @@ TextStyle textFieldStyle = const TextStyle(
 );
 
 TextStyle labelTextStyle = const TextStyle(
-  fontSize: 16,
-  color: hintTextColor,
-  fontWeight: FontWeight.w600,
+  fontSize: 14,
+  color: kWhite,
+  fontWeight: FontWeight.w400,
 );
 
 //ElevatedButton
@@ -50,3 +50,11 @@ TextStyle alertDialogActionsTextStyle = const TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w600,
 );
+ 
+ // Word Search Screen
+TextStyle wordFoundTextStyle = TextStyle(
+  fontSize: 20,
+  color: kWhite,
+  fontWeight: FontWeight.w700,
+);
+

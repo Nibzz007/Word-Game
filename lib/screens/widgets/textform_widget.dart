@@ -2,40 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:mobigic_test/core/fonts/font.dart';
 
 class TextFormWidget extends StatelessWidget {
-  TextFormWidget({
-    super.key,
-    required this.textEditingController,
-    required this.labelText,
-    required this.keyboardType,
-    required this.labelStyle,
-    required this.cursorColor,
-    this.onChanged,
-    this.validator,
-  });
+  TextFormWidget(
+      {super.key,
+      this.textEditingController,
+      this.labelText,
+      this.labelStyle,
+      required this.keyboardType,
+      required this.cursorColor,
+      this.onChanged,
+      this.validator,
+      required this.textAlign,
+      this.maxLength,
+      this.prefixIcon});
 
-  final String labelText;
-  final TextEditingController textEditingController;
+  String? labelText;
+  TextEditingController? textEditingController;
   final TextInputType keyboardType;
-  final TextStyle labelStyle;
+  TextStyle? labelStyle;
   final Color cursorColor;
   Function(String)? onChanged;
   String? Function(String?)? validator;
+  TextAlign textAlign;
+  int? maxLength;
+  Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: maxLength,
+      textAlign: textAlign,
       validator: validator,
       onChanged: onChanged,
       style: textFieldStyle,
       cursorColor: cursorColor,
       controller: textEditingController,
       keyboardType: keyboardType,
+      cursorHeight: 22,
       decoration: InputDecoration(
+        prefixIcon: prefixIcon,
         labelText: labelText,
         labelStyle: labelTextStyle,
         contentPadding: const EdgeInsets.all(18),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(40),
         ),
       ),
     );

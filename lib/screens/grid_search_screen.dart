@@ -5,15 +5,18 @@ import 'package:mobigic_test/core/sizes/size.dart';
 import 'package:mobigic_test/screens/widgets/elevated_button_widget.dart';
 import 'package:mobigic_test/screens/widgets/textform_widget.dart';
 
-class GridDisplayScreen extends StatefulWidget {
+class GridSearchScreen extends StatefulWidget {
   final List<List<String>> grid;
-  const GridDisplayScreen({super.key, required this.grid});
+  const GridSearchScreen({
+    super.key,
+    required this.grid,
+  });
 
   @override
-  State<GridDisplayScreen> createState() => _GridDisplayScreenState();
+  State<GridSearchScreen> createState() => _GridSearchScreenState();
 }
 
-class _GridDisplayScreenState extends State<GridDisplayScreen> {
+class _GridSearchScreenState extends State<GridSearchScreen> {
   TextEditingController searchController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<List<bool>> highlightGrid = [];
@@ -128,7 +131,7 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
         ),
         backgroundColor: appBarColor,
         title: Text(
-          'Display Grid',
+          'Word Search',
           style: appBarTextStyle,
         ),
       ),
@@ -137,15 +140,16 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              kHeight100,
+              kHeight50,
               GridView.builder(
                 shrinkWrap: true,
                 itemCount: widget.grid.length * widget.grid[0].length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: widget.grid[0].length,
-                    mainAxisSpacing: 0.8,
-                    crossAxisSpacing: 0.8,
-                    childAspectRatio: 1.4),
+                  crossAxisCount: widget.grid[0].length,
+                  mainAxisSpacing: 0.8,
+                  crossAxisSpacing: 0.8,
+                  childAspectRatio: 1.4,
+                ),
                 itemBuilder: (context, index) {
                   int row = index ~/ widget.grid[0].length;
                   int col = index % widget.grid[0].length;
@@ -163,6 +167,7 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
               Form(
                 key: formKey,
                 child: TextFormWidget(
+                  textAlign: TextAlign.left,
                   textEditingController: searchController,
                   labelText: 'Search here.....',
                   keyboardType: TextInputType.text,
@@ -175,10 +180,6 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
                       return null;
                     }
                   },
-                  onChanged: (value) {
-                    reset();
-                    search(value);
-                  },
                 ),
               ),
               kHeight20,
@@ -187,17 +188,19 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
                   if (!formKey.currentState!.validate()) {
                     return;
                   }
-                  if (search(searchController.text)) {
+                  reset();
+                  search(searchController.text);
+                  if (!search(searchController.text)) {
                     showDialog(
                       context: context,
                       builder: (context) {
                         return AlertDialog(
                           title: Text(
-                            'Word found',
+                            'Word not found',
                             style: alertDialogTitleTextStyle,
                           ),
                           content: Text(
-                            'The word is present in the Grid',
+                            'The word is not present, Search again...',
                             style: alertDialogContentTextStyle,
                           ),
                           actions: [
@@ -208,44 +211,6 @@ class _GridDisplayScreenState extends State<GridDisplayScreen> {
                               child: Text(
                                 'Ok',
                                 style: alertDialogActionsTextStyle,
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text(
-                            'Word not found',
-                            style: alertDialogTitleTextStyle,
-                          ),
-                          content: Text(
-                            'The word is not present in the Grid',
-                            style: alertDialogContentTextStyle,
-                          ),
-                          actions: [
-                            Container(
-                              height: 50,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(
-                                  width: 0.2,
-                                  color: kPurple,
-                                ),
-                              ),
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  'Ok',
-                                  style: alertDialogActionsTextStyle,
-                                ),
                               ),
                             ),
                           ],
